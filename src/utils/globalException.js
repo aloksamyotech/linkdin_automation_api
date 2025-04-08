@@ -1,6 +1,7 @@
 import logger from "../core/config/logger.js";
 
 const globalExceptionHandler = (err, req, res, next) => {
+  console
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error!";
   const errorCode =
