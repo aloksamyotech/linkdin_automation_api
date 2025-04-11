@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
-import { database_urls } from "../common/constant.js";
 import "dotenv/config";
 
 const connectDB = async () => {
   try {
     (async function () {
-      const dbUri = database_urls.connection + database_urls.db_name;
+      const dbUri = process.env.DB_URL;
       await mongoose.connect(dbUri, {
         // useNewUrlParser: true,
         // useUnifiedTopology: true,
