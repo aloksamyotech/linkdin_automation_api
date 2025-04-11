@@ -2,7 +2,7 @@ import * as crypto from "crypto";
 
 export class Encrypter {
     static algorithm = "aes256";
-    static key = crypto.scryptSync("<Your-Secret-Key>", "salt", 32);
+    static key = crypto.scryptSync(process.env.PASSWORD_SECRET_KEY, "salt", 32);
     static encrypt(clearText) {
         const iv = crypto.randomBytes(16);
         try {

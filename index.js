@@ -6,8 +6,7 @@ import logger from './src/core/config/logger.js';
 import "dotenv/config"
 import responseInterceptor from './src/utils/responseInterceptor.js';
 import path from 'path';
-import UserRouter from './src/routes/user.js';
-
+import indexRoute from "./src/routes/user/index.js";
 const app = express();
 const PORT = (() => {
     const env = process.env.ENV;
@@ -26,7 +25,7 @@ app.use((req, res, next) => {
 await connectDB()
 app.use(responseInterceptor);
 app.use(globalExceptionHandler);
-app.use("/api/v1/user", UserRouter)
+app.use("/api/v1/user", indexRoute);
 
 app.listen(PORT, () => {
     logger.info(`Server is running at port ${PORT}`);

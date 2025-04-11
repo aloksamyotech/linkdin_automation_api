@@ -25,6 +25,7 @@ export const statusCodes = Object.freeze({
 })
 
 export const Message = {
+  created:'Created Successfully',
   notFound: "Not Found",
   registerSuccessfully: "Successfully Registered",
   inValid: "Invalid Credentials",
@@ -41,6 +42,7 @@ export const Message = {
   loginError: "Login Error",
   notUpdate: "Update Failed",
   serverError: "Intrnal Server Error",
+  noContent: "No Content"
 };
 
 export const errorCodes = Object.freeze({
@@ -123,3 +125,8 @@ export const errorCodes = Object.freeze({
   missing_auth_token: "MISSING_AUTH_TOKEN",
   invalid_operation: "INVALID_OPERATION",
 });
+
+export const Scrapping_Routes ={
+  connect_account : 'connect-account',
+  verify_otp: 'verifyOtp'
+}
