@@ -16,8 +16,14 @@ const updateList = async(req,res)=>{
     res.status(statusCodes?.ok).send(data);
 }
 
+const getPaginatedData = async(req,res)=>{
+    const data = await listServices.getPaginatedList(req);
+    res.status(statusCodes?.ok).send(data);
+}
+
 export default {
     createList,
     getListByUserId,
-    updateList
+    updateList,
+    getPaginatedData
 }

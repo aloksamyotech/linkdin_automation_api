@@ -5,11 +5,6 @@ const ListSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    linkedInId:{
-        type:mongoose.Types.ObjectId,
-        ref:'LinkedinAccount',
-        required:true
-    },
     type:{
         type:String,
         required:true
@@ -18,7 +13,12 @@ const ListSchema = mongoose.Schema({
         type:Number,
         default:0
     },
-    userId:{
+    linkedInId:{
+        type:mongoose.Types.ObjectId,
+        ref:'LinkedinAccount',
+        required: true
+    },
+    createdBy:{
         type: mongoose.Types.ObjectId,
         ref:'User',
         required:true

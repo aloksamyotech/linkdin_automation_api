@@ -6,10 +6,10 @@ import ScrappingService from "../external/ScrappingService.js";
 import mongoose from "mongoose";
 
 const connectLinkedinAccount = async (req) => {
-  const { isAuthenticate, email, password,userId } = req.body;
+  const { isAuthenticate, email, password, userId } = req.body;
   const isUserAlreadyExist = await LinkedinAccount.findOne({ email });
 
-  if (isUserAlreadyExist || isUserAlreadyExist?.isConnected) {
+  if (isUserAlreadyExist.email) {
     throw new CustomError(
       statusCodes?.conflict,
       Message?.alreadyExist,
@@ -21,26 +21,22 @@ const connectLinkedinAccount = async (req) => {
   const loginDetails = { username: email, password, isAuthenticate };
   const { success, otpRequired, message, sessionId } = await ScrappingService.connectAccount(loginDetails);
 
-  if (isConnected) {
-    const data = {
-        email,
-        password: encryptedData,
-        iv,
-        isAuthenticate,
-        isConnected: success,
-    };
+  const data = {
+      email,
+      password: encryptedData,
+      isAuthenticate,
+      isConnected: success,
+      createdBy: userId
+  };
     
-    const user = existingUser
-        ? await LinkedinAccount.findOneAndUpdate({ email }, { $set: data }, { new: true })
-        : await LinkedinAccount.create({ ...data, createdBy: userId });
+  const user =  await LinkedinAccount.create({ ...data });
 
-    return {
-        user,
-        success,
-        message,
-        ...(otpRequired && { isOtpRequired: true, sessionId }),
-    };
-  }
+  return {
+      user,
+      success,
+      message,
+      ...(otpRequired && { isOtpRequired: true, sessionId }),
+  };
 };
 
 const getLinkedinAccount = async () => {
@@ -48,22 +44,22 @@ const getLinkedinAccount = async () => {
   return data;
 };
 
-const updateStatus = async (req,res)=>{
+const updateStatus = async (req)=>{
     const data = await LinkedinAccount.findOneAndUpdate(
         { _id:req?.params?.id },
         { $set:{isConnected:req?.body?.success,otp:null}  },
         { new:true }
     )
-    res.status(statusCodes?.ok).send(data);
-}
-
-const getLinkedinAccountByUserId = async()=>{
-    const data = await LinkedinAccount.find({createdBy:req?.params?.userId, isDeleted:false});
     return data;
 }
 
-const getLinkedinAccountById = async()=>{
-    const data = await LinkedinAccount.find({_id:req?.params.id, isDeleted:false});
+const getLinkedinAccountByUserId = async(userId)=>{
+    const data = await LinkedinAccount.find({createdBy:userId, isDeleted:false});
+    return data;
+}
+
+const getLinkedinAccountById = async(id)=>{
+    const data = await LinkedinAccount.findOne({_id:id, isDeleted:false});
     return data;
 }
 

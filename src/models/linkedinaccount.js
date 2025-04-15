@@ -12,10 +12,6 @@ const LinkedinAccountSchema = mongoose.Schema(
         required: true,
         trim: true,
       },
-      iv: {
-        type: String,
-        required: true,
-      },
       isAuthenticate: {
         type: Boolean,
         default: false,

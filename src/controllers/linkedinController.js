@@ -31,12 +31,12 @@ const getLinkedinAccount = async (req, res) => {
 };
 
 const getLinkedinAccountByUserId = async(req,res)=>{
-  const data = await linkedinAccountServices.getLinkedinAccountByUserId(req);
+  const data = await linkedinAccountServices.getLinkedinAccountByUserId(req?.params?.userId);
   res.status(statusCodes?.ok).send(data);
 }
 
 const getLinkedinAccountById = async(req,res)=>{
-  const data = await linkedinAccountServices.getLinkedinAccountById(req);
+  const data = await linkedinAccountServices.getLinkedinAccountById(req?.params?.id);
   res.status(statusCodes?.ok).send(data);
 }
 

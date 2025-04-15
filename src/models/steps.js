@@ -30,6 +30,11 @@ const StepSchema = mongoose.Schema({
         type:Number,
         required:false
     },
+    createdBy: { 
+        type:mongoose.Types.ObjectId,
+        ref:'User',
+        required:true 
+    },
     createdAt:{
         type:Date,
         default:Date.now()
@@ -40,4 +45,4 @@ const StepSchema = mongoose.Schema({
     }
 });
 
-export const StepModel = mongoose.Model('Step',StepSchema);
+export const StepModel = mongoose.model('Step',StepSchema);

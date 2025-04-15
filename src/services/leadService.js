@@ -1,8 +1,15 @@
 import { LeadModel } from "../models/lead.js";
+import listServices from "./listServices.js";
 
 const createLead = async (leaddata)=>{
+    console.log("leadData : ",leaddata);
     const data = await LeadModel.inserMany(leaddata);
-    return data;
+    const totalLead = await LeadModel.countDocuments({
+      listId:leaddata[0]?.listId,
+      isDeleted:false
+    });
+    const updatelist = await listServices.updateCount({id:leaddata[0]?.listId,totalLead});
+    return {data,updatelist};
 }
 
 const getLeadData = async () => {
@@ -16,7 +23,7 @@ const getLeadDataByListId = async () => {
 };
 
 const getLeadById = async ()=>{
-    const data = await LeadAccount.findOme({_id:req?.params?.id},{ row:0 });
+    const data = await LeadAccount.findOne({_id:req?.params?.id},{ row:0 });
     return data;
 }
 
