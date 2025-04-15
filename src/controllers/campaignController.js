@@ -2,6 +2,7 @@ import { statusCodes } from "../core/common/constant.js";
 import CampaignService from "../services/campaignService.js";
 
 const createCampaign = async (req,res)=>{
+    console.log("req?.body : ",req?.body);
     const campaign = await CampaignService.createCampaign(req);
     res.status(statusCodes?.created).send(campaign);
 }
@@ -26,10 +27,16 @@ const getAllCampaign = async(req,res)=>{
     res.status(statusCodes?.ok).send(data);
 }
 
+const updateCampaign = async(req,res)=>{
+    const data = await CampaignService.updateCampaign(req);
+    res.status(statusCodes?.ok).send(data);
+}
+
 export default {
     createCampaign,
     getCampaignById,
     getCampaignByUserId,
     getPaginatedData,
-    getAllCampaign
+    getAllCampaign,
+    updateCampaign
 }

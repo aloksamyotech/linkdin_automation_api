@@ -1,9 +1,6 @@
 import { errorCodes, Message, statusCodes } from "../core/common/constant.js";
-import { Encrypter } from "../core/common/helper.js";
-import ScrappingService from "../external/ScrappingService.js";
 import { ListModel } from "../models/list.js";
 import CustomError from "../utils/exception.js";
-import linkedinServices from "./linkedinServices.js";
 
 const createList = async(req)=>{
     const listData = await ListModel.create({
@@ -19,15 +16,6 @@ const createList = async(req)=>{
             errorCodes?.internal_error 
         );
     }
-    const linkedinUser = await linkedinServices.getLinkedinAccountById(req?.body?.linkedInId);
-    console.log("linkedinUser : ",linkedinUser);
-    const password = await Encrypter.decrypt(linkedinUser?.password);
-    const user={
-        username: linkedinUser?.email,
-        password:password
-    };
-    const response = await ScrappingService.scrappLead({user,listData,url:req?.body?.url});
-    console.log("response : ",response);
     return listData;
 }
 

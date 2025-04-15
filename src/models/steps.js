@@ -30,6 +30,10 @@ const StepSchema = mongoose.Schema({
         type:Number,
         required:false
     },
+    isDeleted:{
+        type:Boolean,
+        default:false,
+    },
     createdBy: { 
         type:mongoose.Types.ObjectId,
         ref:'User',

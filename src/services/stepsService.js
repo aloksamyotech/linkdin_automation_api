@@ -1,3 +1,4 @@
+import { Message, statusCodes } from "../core/common/constant.js";
 import { StepModel } from "../models/steps.js";
 
 const createSteps = async(req)=>{
@@ -10,7 +11,27 @@ const getStepsByCampaignId = async(req)=>{
     return data;
 }
 
+const updateSteps = async(req)=>{
+    const data = await StepModel.findOne({_id:req?.params?.id});
+    if(!data){
+       return {status:statusCodes?.noContent,message:Message?.noContent}
+    }
+    const updateData = await StepModel.findOneAndUpdate({_id:data?._id},{$set:req?.body},{new:true});
+    return updateData;
+}
+
+const deleteSteps = async(req)=>{
+    const data = await StepModel.findOne({_id:req?.params?.id});
+    if(!data){
+       return {status:statusCodes?.noContent,message:Message?.noContent}
+    }
+    const updateData = await StepModel.findOneAndUpdate({_id:data?._id},{$set:{isDeleted:true}},{new:true});
+    return updateData;
+}
+
 export default {
     createSteps,
-    getStepsByCampaignId
+    getStepsByCampaignId,
+    updateSteps,
+    deleteSteps
 }

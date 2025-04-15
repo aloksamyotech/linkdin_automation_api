@@ -11,7 +11,18 @@ const getStepsByCampaignId = async (req,res)=>{
     res.status(statusCodes?.ok).send(data);
 }
 
+const updateSteps = async (req,res)=>{
+    const data = await StepsService.updateSteps(req);
+    res.status(statusCodes?.ok).send(data);
+}
+
+const deleteSteps = async(req,res)=>{
+    const data = await StepsService.deleteSteps(req);
+    res.status(statusCodes?.ok).send(data);
+}
 export default {
     createStep,
-    getStepsByCampaignId
+    getStepsByCampaignId,
+    updateSteps,
+    deleteSteps
 }

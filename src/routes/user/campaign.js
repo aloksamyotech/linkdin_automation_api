@@ -8,5 +8,6 @@ router.get('/getCampaignById/:id',asyncHandler(CampaignController.getCampaignByI
 router.get('/getCampaignByUserId/:userId',asyncHandler(CampaignController.getCampaignByUserId));
 router.get('/getPaginatedCampaign/:userId',asyncHandler(CampaignController.getPaginatedData));
 router.get('/getAllCampaign',asyncHandler(CampaignController.getAllCampaign));
+router.put('/updateCampaign/:id',asyncHandler(CampaignController.updateCampaign));
 
 export default router;

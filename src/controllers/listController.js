@@ -1,9 +1,21 @@
 import listServices from "../services/listServices.js";
 import { statusCodes } from "../core/common/constant.js";
+import linkedinServices from "../services/linkedinServices.js";
+import { Encrypter } from "../core/common/helper.js";
+import ScrappingService from "../external/ScrappingService.js";
 
 const createList = async(req,res)=>{
     const data = await listServices.createList(req);
     res.status(statusCodes?.created).send(data);
+    const linkedinUser = await linkedinServices.getLinkedinAccountById(req?.body?.linkedInId);
+    console.log("linkedinUser : ",linkedinUser);
+    const password = await Encrypter.decrypt(linkedinUser?.password);
+    const user={
+        username: linkedinUser?.email,
+        password:password
+    };
+    const response = await ScrappingService.scrappLead({user,data,url:req?.body?.url});
+    console.log("response : ",response);
 }
 
 const getListByUserId = async(req,res)=>{

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { CampaignModel } from "../models/campaign.js";
+import { Message, statusCodes } from "../core/common/constant.js";
 
 const createCampaign = async(req)=>{
     const data = await CampaignModel.create(req.body);
@@ -12,12 +13,12 @@ const getAllCampaign = async()=>{
 }
 
 const getCampaignById = async(req)=>{
-    const data = await CampaignModel.findOne({_id:req.body.id,isDeleted:false});
+    const data = await CampaignModel.findOne({_id:req.params.id,isDeleted:false});
     return data;
 }
 
 const getCampaignByUserId = async(req)=>{
-    const data = await CampaignModel.find({createdBy:req.body.userId,isDeleted:false});
+    const data = await CampaignModel.find({createdBy:req.params.userId,isDeleted:false});
     return data;
 }
 
@@ -57,11 +58,25 @@ const getCampaignCount = async(id)=>{
    return totalCount;
 }
 
+const updateCampaign = async(req)=>{
+  const data = await CampaignModel.findOne({_id:req?.params?.id});
+  if(!data){
+    return {status:statusCodes?.notFound,message:Message?.notFound};
+  }
+  const updateCampaign = await CampaignModel.findOneAndUpdate(
+    { _id:req?.params?.id },
+    { $set:req.body },
+    { new:true }
+  );
+  return updateCampaign;
+}
+
 export default {
     createCampaign,
     getCampaignById,
     getCampaignByUserId,
     getPaginatedCampaignData,
     getAllCampaign,
-    getCampaignCount
+    getCampaignCount,
+    updateCampaign
 }

@@ -3,7 +3,7 @@ import listServices from "./listServices.js";
 
 const createLead = async (leaddata)=>{
     console.log("leadData : ",leaddata);
-    const data = await LeadModel.inserMany(leaddata);
+    const data = await LeadModel.insertMany(leaddata);
     const totalLead = await LeadModel.countDocuments({
       listId:leaddata[0]?.listId,
       isDeleted:false
