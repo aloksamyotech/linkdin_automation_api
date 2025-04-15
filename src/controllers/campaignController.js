@@ -2,7 +2,6 @@ import { statusCodes } from "../core/common/constant.js";
 import CampaignService from "../services/campaignService.js";
 
 const createCampaign = async (req,res)=>{
-    console.log("req?.body : ",req?.body);
     const campaign = await CampaignService.createCampaign(req);
     res.status(statusCodes?.created).send(campaign);
 }

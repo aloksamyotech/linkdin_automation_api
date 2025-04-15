@@ -34,11 +34,6 @@ const StepSchema = mongoose.Schema({
         type:Boolean,
         default:false,
     },
-    createdBy: { 
-        type:mongoose.Types.ObjectId,
-        ref:'User',
-        required:true 
-    },
     createdAt:{
         type:Date,
         default:Date.now()

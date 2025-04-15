@@ -2,7 +2,6 @@ import { Message, statusCodes } from "../core/common/constant.js";
 import leadService from "../services/leadService.js";
 
 const createLead = async(req,res)=>{
-  console.log("req.body  : ",req.body);  
   const data = await leadService.createLead(req?.body);
   res.status(statusCodes?.created).send({data,message:Message?.created});
 }

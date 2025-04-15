@@ -2,12 +2,12 @@ import { Message, statusCodes } from "../core/common/constant.js";
 import { StepModel } from "../models/steps.js";
 
 const createSteps = async(req)=>{
-    const data = await StepModel.create(req?.body);
+    const data = await StepModel.insertMany(req?.body);
     return data;
 }
 
 const getStepsByCampaignId = async(req)=>{
-    const data = await StepModel.find({campaignId: req?.params?.campaignId});
+    const data = await StepModel.find({campaignId: req?.params?.campaignId,isDeleted:false}).sort({index:1});
     return data;
 }
 
