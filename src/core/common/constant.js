@@ -129,7 +129,7 @@ export const errorCodes = Object.freeze({
 export const Scrapping_Routes = {
   connect_account : 'connect-account',
   verify_otp: 'verifyOtp',
-  send_connection_request: 'sendsendConnectionRequest',
+  send_connection_request: 'sendConnectionRequest',
   scrap_lead:'scrapLead',
   view_profile:'viewProfile',
   check_status:'checkStatus',
