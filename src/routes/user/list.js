@@ -5,6 +5,8 @@ const router = Router();
 
 router.post("/createList",asyncHandler(ListController.createList));
 router.get("/getListByUserId/:userId",asyncHandler(ListController.getListByUserId));
+router.get('/getListById/:id',asyncHandler(ListController.getListById));
 router.put("/updateList/:id",asyncHandler(ListController.updateList));
+router.get("/getPaginatedList",asyncHandler(ListController.getPaginatedData));
 
 export default router;

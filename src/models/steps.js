@@ -30,6 +30,10 @@ const StepSchema = mongoose.Schema({
         type:Number,
         required:false
     },
+    isDeleted:{
+        type:Boolean,
+        default:false,
+    },
     createdAt:{
         type:Date,
         default:Date.now()
@@ -40,4 +44,4 @@ const StepSchema = mongoose.Schema({
     }
 });
 
-export const StepModel = mongoose.Model('Step',StepSchema);
+export const StepModel = mongoose.model('Step',StepSchema);
