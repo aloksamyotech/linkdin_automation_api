@@ -7,7 +7,8 @@ const ListSchema = mongoose.Schema({
     },
     type:{
         type:String,
-        required:true
+        required:true,
+        enum:['people','post_reactors','csv','company']
     },
     leadCount:{
         type:Number,

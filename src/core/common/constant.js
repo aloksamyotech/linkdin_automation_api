@@ -127,13 +127,13 @@ export const errorCodes = Object.freeze({
 });
 
 export const Scrapping_Routes = {
-  connect_account : 'connect-account',
-  verify_otp: 'verifyOtp',
-  send_connection_request: 'sendConnectionRequest',
-  scrap_lead:'scrapLead',
-  view_profile:'viewProfile',
-  check_status:'checkStatus',
-  post_like:'postLike',
-  send_message:'sendMessage',
-  check_reply_status:'checkReplyStatus'
+  connect_account : '/connect-account',
+  verify_otp: '/verifyOtp',
+  send_connection_request: '/sendConnectionRequest',
+  scrap_lead:'/scrapLead',
+  view_profile:'/viewProfile',
+  check_status:'/checkStatus',
+  post_like:'/postLike',
+  send_message:'/sendMessage',
+  check_reply_status:'/checkReplyStatus'
 }

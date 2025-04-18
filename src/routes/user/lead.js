@@ -7,5 +7,6 @@ router.post("/createLead",asyncHandler(LeadController.createLead));
 router.get("/getLead",asyncHandler(LeadController.getLeadData));
 router.get('/getLeadByListid/:id',asyncHandler(LeadController.getLeadByListId));
 router.get('/getLeadById/:id',asyncHandler(LeadController?.getLeadById));
+router.get('/getPaginatedLeadByListId',asyncHandler(LeadController.getPaginatedLead));
 
 export default router;

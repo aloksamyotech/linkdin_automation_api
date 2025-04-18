@@ -7,9 +7,9 @@ import mongoose from "mongoose";
 
 const connectLinkedinAccount = async (req) => {
   const { isAuthenticate, email, password, userId } = req.body;
-  const isUserAlreadyExist = await LinkedinAccount.findOne({ email });
-
-  if (isUserAlreadyExist.email) {
+  const isUserAlreadyExist = await LinkedinAccount.findOne({ email,isDeleted:false });
+  
+  if (isUserAlreadyExist) {
     throw new CustomError(
       statusCodes?.conflict,
       Message?.alreadyExist,
@@ -40,7 +40,7 @@ const connectLinkedinAccount = async (req) => {
 };
 
 const getLinkedinAccount = async () => {
-  const data = await LinkedinAccount.find();
+  const data = await LinkedinAccount.find({isDeleted:false});
   return data;
 };
 

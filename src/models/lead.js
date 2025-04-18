@@ -10,13 +10,21 @@ const leadSchema = mongoose.Schema({
         type:String,
         required:false 
     },
-    title: { 
+    headline:{
+        type:String,
+        required:false
+    },
+    location: { 
         type:String,
         required:false 
     },
     company: { 
         type:String,
         required:false 
+    },
+    image:{
+        type:String,
+        required:false
     },
     email: { 
         type:String,

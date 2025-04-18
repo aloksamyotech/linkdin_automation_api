@@ -25,9 +25,6 @@ export class Encrypter {
     static decrypt(encryptedText) {
         try {
             const [encrypted, iv] = encryptedText.split("|");
-            console.log("encrypted  ;",encrypted);
-            console.log("iv  ;",iv);
-            
             if (!iv) throw new Error("IV not found");
             const decipher = crypto.createDecipheriv(
                 Encrypter.algorithm,

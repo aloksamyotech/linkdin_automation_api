@@ -8,18 +8,21 @@ const createList = async(req,res)=>{
     const data = await listServices.createList(req);
     res.status(statusCodes?.created).send(data);
     const linkedinUser = await linkedinServices.getLinkedinAccountById(req?.body?.linkedInId);
-    console.log("linkedinUser : ",linkedinUser);
     const password = await Encrypter.decrypt(linkedinUser?.password);
     const user={
         username: linkedinUser?.email,
         password:password
     };
     const response = await ScrappingService.scrappLead({user,data,url:req?.body?.url});
-    console.log("response : ",response);
 }
 
 const getListByUserId = async(req,res)=>{
     const data = await listServices.getListByUserId(req);
+    res.status(statusCodes?.ok).send(data);
+}
+
+const getListById = async(req,res)=>{
+    const data = await listServices.getListById(req.params.id);
     res.status(statusCodes?.ok).send(data);
 }
 
@@ -37,5 +40,6 @@ export default {
     createList,
     getListByUserId,
     updateList,
-    getPaginatedData
+    getPaginatedData,
+    getListById
 }

@@ -6,7 +6,10 @@ import logger from './src/core/config/logger.js';
 import "dotenv/config"
 import responseInterceptor from './src/utils/responseInterceptor.js';
 import path from 'path';
+import { Server } from 'socket.io';
+import http from 'http';
 import indexRoute from "./src/routes/user/index.js";
+import initializeSocketEvents from './src/socket/index.js';
 const app = express();
 const PORT = (() => {
     const env = process.env.ENV;
@@ -27,6 +30,20 @@ app.use(responseInterceptor);
 app.use(globalExceptionHandler);
 app.use("/api/v1/user", indexRoute);
 
-app.listen(PORT, () => {
+const server = http.createServer(app);
+const io = new Server(server,{
+    cors: {
+      origin: "http://localhost:3000",
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      credentials: true,
+    },
+    transports: ['websocket'],
+  });
+
+app.set('socketio', io);   
+
+initializeSocketEvents(io);
+
+server.listen(PORT, () => {
     logger.info(`Server is running at port ${PORT}`);
 });
